@@ -14,6 +14,7 @@
 
 %% COMMENT 
 clc;clear;clearvars;close;
+addpath(genpath(pwd))
 %% COMMENT ENDS
 
 LFOSRVersion=3.41;
@@ -38,6 +39,8 @@ action = 'initialize';
     disp('  8 - Non-polarized Light Source')
     disp('  9 - Textured Reflection')
     disp(' ')
+    disp('Type "exit", "quit", or "q" to exit program')
+    disp(' ')
     user_option=input('Please select User Option (1 - default)-> ','s');
 
 %% If nothing is entered 1 is assumed as default
@@ -46,53 +49,44 @@ action = 'initialize';
         user_option='1';
     end
 
-%% Enter "exit, quit, or q" to quit
-    
-    if ischar(user_option) && (strcmp(user_option,'quit')||strcmp(user_option,'q')||strcmp(user_option,'exit'))
+%% %% Check for "exit", "quit" or "q" and error if any other text entered; if not convert user_option to number 
+
+    if not(isnan(str2double(user_option))) && str2double(user_option) > 0 && str2double(user_option) < 10   
+        user_option=str2double(user_option);
+    elseif strcmp(user_option,'quit')||strcmp(user_option,'q')||strcmp(user_option,'exit')
+        disp('You quit the program');
         return
-    elseif ischar(user_option) && isempty(str2double(user_option))
-        error('Invalid User Option Entry') %   all other text entrys result in error
-    end
-
-    user_option=str2double(user_option); %converts to number for option check
-
-%% This is the option selection to resolve user input to avaiable options
-    
-    if user_option==1
-        user_selection='none';
-        user_run=0;
-    elseif user_option==2
-        user_selection='power';
-        user_run=1;
-    elseif user_option==3
-        user_selection='max';
-        user_run=1;
-    elseif user_option==4
-        user_selection='biosensor';
-        user_run=1;
-    elseif user_option==5
-        user_selection='specphoto';
-        user_run=1;
-    elseif user_option==6
-        user_selection='propagation';
-        user_run=1;
-    elseif user_option==7
-        user_selection='area';
-        user_run=1;
-    elseif user_option==8
-        user_selection='nonpolarized';
-        user_run=1;
-    elseif user_option==9
-        user_selection='textured';
-        user_run=1;
     else
-        error('Incorrect User Option')
+        error('Incorrect User Option') %All other text entries result in error
     end
-    %%%%%%%%%%%%%%%%% SUBROUTINE PATH INPUT %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    [path,name,ext] = fileparts(which(mfilename));
-    addpath(path,fullfile(path,'common_files'),...
-        fullfile(path,'common_files','index_data'));
 
+%% Resolve user input to avaiable options    
+
+    if user_option == 1
+        user_selection = 'none';
+        user_run=0;
+    else
+        user_run = 1;
+    end
+    if user_option == 2
+        user_selection = 'power';
+    elseif user_option == 3
+        user_selection = 'max';
+    elseif user_option == 4
+        user_selection ='biosensor';    
+    elseif user_option == 5
+        user_selection ='specphoto';   
+    elseif user_option == 6
+        user_selection ='propagation';       
+    elseif user_option == 7
+        user_selection ='area';      
+    elseif user_option == 8
+        user_selection ='nonpolarized';     
+    elseif user_option == 9
+        user_selection='textured';
+    end
+%%
+   
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     [StartFigTextColor,StartFigBackColor,OutputFigTextColor,OutputFigBackColor,...
         ButtonTextColor,ButtonBackColor,EditTextColor,EditBackColor,...
