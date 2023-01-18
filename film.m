@@ -1,4 +1,3 @@
-function []=film(action)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  film.m                                                           %
 %  Date: 07/02/2002                                                 %
@@ -102,30 +101,43 @@ function []=film(action)
 %           action == control input(eval,close,info,intialize,save) %
 %                                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-LFOSRVersion=3.41; %routine version code
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%% PROGRAM INPUT CONTROL %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-if nargin < 1 %on start without input variables run initialize code
+%% PROGRAM INPUT STARTS
+
+
+
+function []=film(action)
+
+%% UNCOMMENT LATER
+
+% If Nothing Entered
+
+if nargin < 1 % on start without input variables run initialize code
     action = 'initialize';
 end
 
+%% UNCOMMENT LATER
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%% END PROGRAM INPUT CONTROL %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Program Interface: 'initialize' (START HERE FOR ANALYSIS)
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%% INITIALIZE PROGRAM INTERFACE %%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% COMMENT LATER
+
+% clc;clear;clearvars;close;
+% action = input("","s")
+
+%% COMMENT ENDS
+
+LFOSRVersion=3.41;
+
+%% UNCOMMENT
 if strcmp(action,'initialize')
+%% UNCOMMENT ENDS    
 
-    %
     % Display user option selection
-    %
+
     disp(['LFOSR Film Routine Version ',num2str(LFOSRVersion)])
     disp(' User Option Selection')
+    disp(' ')
     disp('  1 - Standard Option (default)')
     disp('  2 - Power Option')
     disp('  3 - Display Maximum Reflectivity Option')
@@ -138,17 +150,15 @@ if strcmp(action,'initialize')
     disp(' ')
     user_option=input('Please select User Option (1 - default)-> ','s');
 
-    %
-    % If nothing is entered 1 is assumed as default
-    %
+    %% If nothing is entered 1 is assumed as default
+    
     if isempty(user_option)
         user_option='1';
     end
 
-    %
     % This allows users to enter "exit, quit, or q" to quit the LFOSR routine
     %   all other text entrys result in error
-    %
+    
     if ischar(user_option) && (strcmp(user_option,'quit')||strcmp(user_option,'q')||strcmp(user_option,'exit'))
         return
     elseif ischar(user_option) && isempty(str2double(user_option))
@@ -1434,3 +1444,5 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%LFOSR CHANGE TEST
+
+end
