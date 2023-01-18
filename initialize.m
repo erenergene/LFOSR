@@ -12,17 +12,18 @@
 
 %% Program Interface: 'initialize' (START HERE FOR ANALYSIS)
 
-%% COMMENT LATER
+%% COMMENT 
 clc;clear;clearvars;close;
 %% COMMENT ENDS
 
 LFOSRVersion=3.41;
+action = 'initialize';
 
 %% UNCOMMENT
 % if strcmp(action,'initialize')
 %% UNCOMMENT ENDS    
 
-    % Display user option selection
+%% Display user option selection
 
     disp(['LFOSR Film Routine Version ',num2str(LFOSRVersion)])
     disp(' User Option Selection')
@@ -39,28 +40,24 @@ LFOSRVersion=3.41;
     disp(' ')
     user_option=input('Please select User Option (1 - default)-> ','s');
 
-    %% If nothing is entered 1 is assumed as default
+%% If nothing is entered 1 is assumed as default
     
     if isempty(user_option)
         user_option='1';
     end
 
-    %% 
-
-    % This allows users to enter "exit, quit, or q" to quit the LFOSR routine
-    %   all other text entrys result in error
+%% Enter "exit, quit, or q" to quit
     
     if ischar(user_option) && (strcmp(user_option,'quit')||strcmp(user_option,'q')||strcmp(user_option,'exit'))
         return
     elseif ischar(user_option) && isempty(str2double(user_option))
-        error('Invalide User Option Entry')
+        error('Invalid User Option Entry') %   all other text entrys result in error
     end
 
     user_option=str2double(user_option); %converts to number for option check
 
-    %
-    % This is the option selection to resolve user input to avaiable options
-    %
+%% This is the option selection to resolve user input to avaiable options
+    
     if user_option==1
         user_selection='none';
         user_run=0;
